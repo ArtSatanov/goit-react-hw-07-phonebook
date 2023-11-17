@@ -27,7 +27,7 @@ export const ContactList = () => {
         {visibleContact.map(contact => (
           <tr key={contact.id}>
             <StyledTd>{contact.name}</StyledTd>
-            <StyledTd>{contact.number}</StyledTd>
+            <StyledTd>{contact.phone}</StyledTd>
             <StyledTd>
               <button onClick={() => dispatch(deleteContact(contact.id))}>
                 Delete

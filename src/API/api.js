@@ -8,7 +8,7 @@ export async function getData() {
 }
 
 export async function addData(data) {
-  const response = await axios.post(`/contacts${data}`);
+  const response = await axios.post('/contacts/', data);
   return response.data;
 }
 

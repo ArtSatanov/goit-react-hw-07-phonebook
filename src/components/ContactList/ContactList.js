@@ -1,6 +1,6 @@
 import { StyledTh, StyledTb, StyledTd } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from '../../redux/contactsSlice';
+import { deleteContact } from '../../redux/operations';
 import { useEffect } from 'react';
 import { fetchContacts } from 'redux/operations';
 import { selectVisibleContacts } from 'redux/selectors';
@@ -29,9 +29,9 @@ export const ContactList = () => {
             <StyledTd>{contact.name}</StyledTd>
             <StyledTd>{contact.phone}</StyledTd>
             <StyledTd>
-              {/* <button onClick={() => dispatch(deleteContact(contact.id))}>
+              <button onClick={() => dispatch(deleteContact(contact.id))}>
                 Delete
-              </button> */}
+              </button>
             </StyledTd>
           </tr>
         ))}

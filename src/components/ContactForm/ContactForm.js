@@ -21,25 +21,23 @@ const SignupSchema = Yup.object().shape({
     .required('Required'),
 });
 
-console.log(addContact());
-
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const { contacts } = useSelector(state => state.contacts);
+  // const { contacts } = useSelector(state => state.contacts);
 
-  const handleSubmit = (values, action) => {
-    if (
-      contacts.find(
-        option => option.name.toLowerCase() === values.name.toLowerCase()
-      )
-    ) {
-      alert(`${values.name} is already in contacts`);
-    } else {
-      console.log(values);
-      dispatch(addContact(values));
-      action.resetForm();
-    }
-  };
+  // const handleSubmit = (values, action) => {
+  //   if (
+  //     contacts.find(
+  //       option => option.name.toLowerCase() === values.name.toLowerCase()
+  //     )
+  //   ) {
+  //     alert(`${values.name} is already in contacts`);
+  //   } else {
+  //     console.log(values);
+  //     dispatch(addContact(values));
+  //     action.resetForm();
+  //   }
+  // };
 
   return (
     <Formik
@@ -48,7 +46,7 @@ export const ContactForm = () => {
         phone: '',
       }}
       validationSchema={SignupSchema}
-      onSubmit={handleSubmit}
+      // onSubmit={handleSubmit}
     >
       <StyledForm>
         <StyledLabel>

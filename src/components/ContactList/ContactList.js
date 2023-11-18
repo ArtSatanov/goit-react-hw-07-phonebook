@@ -3,21 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from '../../redux/contactsSlice';
 import { useEffect } from 'react';
 import { fetchContacts } from 'redux/operations';
+import { selectVisibleContacts } from 'redux/selectors';
 
 export const ContactList = () => {
-  const filter = useSelector(state => state.filter);
-  const items = useSelector(state => state.contacts.items);
+  const contacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
-
-  // const visibleContact = items.filter(contact =>
-  //   filter === ''
-  //     ? contact
-  //     : contact.name.toLowerCase().includes(filter.toLowerCase())
-  // );
 
   return (
     <StyledTb>
@@ -30,7 +24,7 @@ export const ContactList = () => {
       </thead>
 
       <tbody>
-        {items.map(contact => (
+        {contacts.map(contact => (
           <tr key={contact.id}>
             <StyledTd>{contact.name}</StyledTd>
             <StyledTd>{contact.phone}</StyledTd>

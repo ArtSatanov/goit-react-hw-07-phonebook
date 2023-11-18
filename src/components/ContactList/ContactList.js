@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from '../../redux/operations';
 import { useEffect } from 'react';
 import { fetchContacts } from 'redux/operations';
-import { selectVisibleContacts } from 'redux/selectors';
+import { selectLoading, selectVisibleContacts } from 'redux/selectors';
+import { Loader } from 'components/Loader/Loader';
 
 export const ContactList = () => {
   const contacts = useSelector(selectVisibleContacts);
+  const isLoading = useSelector(selectLoading);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,28 +17,32 @@ export const ContactList = () => {
   }, [dispatch]);
 
   return (
-    <StyledTb>
-      <thead>
-        <tr>
-          <StyledTh>Name</StyledTh>
-          <StyledTh>Number</StyledTh>
-          <StyledTh>Action</StyledTh>
-        </tr>
-      </thead>
+    <div>
+      {isLoading && <Loader />}
 
-      <tbody>
-        {contacts.map(contact => (
-          <tr key={contact.id}>
-            <StyledTd>{contact.name}</StyledTd>
-            <StyledTd>{contact.phone}</StyledTd>
-            <StyledTd>
-              <button onClick={() => dispatch(deleteContact(contact.id))}>
-                Delete
-              </button>
-            </StyledTd>
+      <StyledTb>
+        <thead>
+          <tr>
+            <StyledTh>Name</StyledTh>
+            <StyledTh>Number</StyledTh>
+            <StyledTh>Action</StyledTh>
           </tr>
-        ))}
-      </tbody>
-    </StyledTb>
+        </thead>
+
+        <tbody>
+          {contacts.map(contact => (
+            <tr key={contact.id}>
+              <StyledTd>{contact.name}</StyledTd>
+              <StyledTd>{contact.phone}</StyledTd>
+              <StyledTd>
+                <button onClick={() => dispatch(deleteContact(contact.id))}>
+                  Delete
+                </button>
+              </StyledTd>
+            </tr>
+          ))}
+        </tbody>
+      </StyledTb>
+    </div>
   );
 };
